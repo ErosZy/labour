@@ -2,7 +2,7 @@ package process
 
 import (
 	"encoding/json"
-	cm "labour/common"
+	_common "labour/common"
 	"labour/models"
 	"labour/parser"
 	"labour/router"
@@ -30,16 +30,13 @@ func NewProcess(taskInfo *models.TaskInfoModel) *Process {
 	return &Process{router}
 }
 
-func getProcessRouterHandler(
-	pageItem *models.PageItemModel,
-	schedulerItem *models.SchedulerItemModel,
-) router.RouterHandlerFunc {
+func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *models.SchedulerItemModel) router.RouterHandlerFunc {
 	return func(urlStr string, params ...interface{}) {
 		var pageItems [][]models.KeyValuePair
 		var schedulers []models.KeyValuePair
 
 		page := params[0].(*common.Page)
-		bodyStr := cm.CharsetIconv(page)
+		bodyStr := _common.CharsetIconv(page)
 
 		if pageItem.Text != nil {
 			pageItems = make([][]models.KeyValuePair, 0)
@@ -106,7 +103,7 @@ func addSchedulers(page *common.Page, schedulers []models.KeyValuePair) {
 	for _, v := range schedulers {
 		u, err := url.Parse(v.Value)
 		if err != nil {
-			cm.Logger(cm.LOG_FATAL, err.Error())
+			_common.Logger(_common.LOG_FATAL, err.Error())
 		}
 
 		var rUrl string
@@ -122,7 +119,7 @@ func addSchedulers(page *common.Page, schedulers []models.KeyValuePair) {
 
 func addPageItems(page *common.Page, pageItems [][]models.KeyValuePair, mainKey string) {
 	tmp := make([]models.KeyValuePair, 0)
-	pipelinerItem := cm.PipelinerItem{}
+	pipelinerItem := _common.PipelinerItem{}
 
 	for _, v := range pageItems {
 		tmp = append(tmp, v...)
@@ -131,7 +128,7 @@ func addPageItems(page *common.Page, pageItems [][]models.KeyValuePair, mainKey 
 	data, err := json.Marshal(tmp)
 
 	if err != nil {
-		cm.Logger(cm.LOG_FATAL, err.Error())
+		_common.Logger(_common.LOG_FATAL, err.Error())
 	}
 
 	pipelinerItem.Body = string(data)

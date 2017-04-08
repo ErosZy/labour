@@ -2,6 +2,7 @@ package common
 
 import (
 	"fmt"
+	"os"
 )
 
 const (
@@ -17,9 +18,10 @@ func Logger(logType int, msg string) {
 		fmt.Println("[DEBUG] " + msg)
 	case LOG_WARNING:
 		fmt.Println("[WANRING] " + msg)
-	case LOG_FATAL:
-		fmt.Println("[FATAL] " + msg)
 	case LOG_INFO:
 		fmt.Println("[INFO] " + msg)
+	case LOG_FATAL:
+		fmt.Println("[FATAL] " + msg)
+		os.Exit(0)
 	}
 }

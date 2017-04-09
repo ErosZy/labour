@@ -1,10 +1,10 @@
 {
-    "targetUrl": "http://search.51job.com/list/000000,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E5%2588%2586%25E6%259E%2590,2,58.html",
+    "targetUrl": "http://search.51job.com/list/000000%252C00,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E5%2588%2586%25E6%259E%2590,2,1.html",
     "threadNum": 4,
     "retryMaxCount": 10,
-    "sleepTime": 250,
+    "sleepTime": 1000,
     "closeTime": 5,
-    "requestTimeout": 2,
+    "requestTimeout": 10,
     "method": "GET",
     "headers": [{
         "key": "Host",
@@ -54,7 +54,7 @@
     }],
     "pages": [{
         "route": "http://search.51job.com/list",
-        "mainKey": "name",
+        "mainKey": "id",
         "text": {
             "regex": [],
             "xpath": [{
@@ -64,6 +64,11 @@
                     "key": "name",
                     "type": 0,
                     "attrKey": ""
+                }, {
+                    "domStr": "p.t1 input",
+                    "key": "id",
+                    "type": 1,
+                    "attrKey": "value"
                 }]
             }]
         }
@@ -79,6 +84,11 @@
                     "key": "name",
                     "type": 0,
                     "attrKey": ""
+                }, {
+                    "domStr": "p.t1 input",
+                    "key": "id",
+                    "type": 1,
+                    "attrKey": "value"
                 }]
             }]
         }

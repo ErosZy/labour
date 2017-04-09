@@ -43,7 +43,7 @@
     }],
     "pages": [{
         "route": "http://sou.zhaopin.com/jobs/searchresult.ashx",
-        "mainKey": "name",
+        "mainKey": "id",
         "text": {
             "regex": [],
             "xpath": [{
@@ -53,6 +53,11 @@
                     "key": "name",
                     "type": 0,
                     "attrKey": ""
+                }, {
+                    "domStr": ".zwmc > input",
+                    "key": "id",
+                    "type": 1,
+                    "attrKey": "value"
                 }]
             }]
         }

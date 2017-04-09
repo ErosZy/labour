@@ -10,6 +10,7 @@ import (
 func CharsetIconv(page *common.Page) string {
 	bodyStr := page.ResBody
 	_, charset, _ := charset.DetermineEncoding([]byte(bodyStr), "text/html")
+
 	if charset == "gbk" {
 		decoder := mahonia.NewDecoder(charset)
 		bodyStr = decoder.ConvertString(bodyStr)

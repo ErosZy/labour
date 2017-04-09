@@ -51,6 +51,17 @@
                 "attrKey": "href"
             }]
         }
+    }, {
+        "route": "http://search.51job.com/jobsearch/search_result.php",
+        "text": {
+            "regex": [],
+            "xpath": [{
+                "domStr": ".p_in li:not(.bk) a",
+                "key": "pageHref",
+                "type": 1,
+                "attrKey": "href"
+            }]
+        }
     }],
     "pages": [{
         "route": "http://search.51job.com/list",

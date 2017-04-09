@@ -1,10 +1,11 @@
 package parser
 
 import (
-	"labour/common"
-	"labour/models"
 	"regexp"
 	"strings"
+
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
 
 	"github.com/PuerkitoBio/goquery"
 )

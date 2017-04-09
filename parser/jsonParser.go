@@ -2,11 +2,12 @@ package parser
 
 import (
 	"encoding/json"
-	"labour/common"
-	"labour/models"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
 
 	"github.com/bitly/go-simplejson"
 )

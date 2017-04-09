@@ -1,35 +1,11 @@
 package parser
 
 import (
-	"labour/common"
-	"labour/models"
 	"regexp"
+
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
 )
-
-/*
-	body := `
-	test({
-			"name":"zyEros",
-			"age" : 24,
-			"female": false,
-			"project":{
-				"name":[
-					"hello","zyEros"
-				]
-			}
-		});
-	`
-
-	pairs := make([]models.JSONItem,0)
-
-	pairs = append(pairs,models.JSONItem{models.KeyValuePair{"project","project.name[1]"},"Object.Array"},
-		models.JSONItem{models.KeyValuePair{"name","name"},"String"},
-		models.JSONItem{models.KeyValuePair{"age","age"},"Int"},
-		models.JSONItem{models.KeyValuePair{"female","female"},"Bool"})
-
-	fmt.Println(parser.ParseJSONP(body,pairs))
-	return
-*/
 
 func ParseJSONP(body string, jsonItems []models.JSONItem) []models.KeyValuePair {
 	reg, err := regexp.Compile(`(?:[\s\S]+?)\(([\s\S]*)\)`)

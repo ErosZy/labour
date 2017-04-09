@@ -2,11 +2,12 @@ package main
 
 import (
 	"io/ioutil"
-	"labour/common"
-	"labour/models"
-	"labour/spider"
 	"os"
 	"runtime"
+
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
+	"github.com/ErosZy/labour/spider"
 
 	"github.com/bitly/go-simplejson"
 )
@@ -22,7 +23,7 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	spider.Run(taskInfo)
 
-	common.Logger(common.LOG_INFO, "task already complete all #^-^#")
+	common.Logger(common.LOG_INFO, "task already complete all ^_^")
 }
 
 func loadConfig(filepath string) *simplejson.Json {

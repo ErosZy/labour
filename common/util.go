@@ -16,7 +16,7 @@ func Extend(o1 interface{}, o2 interface{}) interface{} {
 	ov2 := reflect.ValueOf(o2)
 
 	if ov1.Elem().NumField() != ov2.Elem().NumField() {
-		panic("o1 and o2 need to be the same struct!")
+		Logger(LOG_FATAL, "o1 and o2 need to be the same struct")
 	}
 
 	fieldNum := ov1.Elem().NumField()
@@ -96,19 +96,4 @@ func UnicodeConvert(str string) string {
 	}
 
 	return buf.String()
-}
-
-func RegStrQuote(regStr string) string {
-	r := regexp.MustCompile(`\\"|\\.`)
-	return r.ReplaceAllStringFunc(regStr, func(str string) string {
-		if str == `\"` {
-			return `\\` + str
-		}
-		return `\` + str
-	})
-}
-
-func RegStrUnquote(regStr string) string {
-	r := regexp.MustCompile(`\\`)
-	return r.ReplaceAllString(regStr, `\`)
 }

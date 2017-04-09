@@ -1,0 +1,60 @@
+{
+    "targetUrl": "http://sou.zhaopin.com/jobs/searchresult.ashx?jl=%E4%B8%8A%E6%B5%B7&kw=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88&sm=0&p=1",
+    "threadNum": 4,
+    "retryMaxCount": 10,
+    "sleepTime": 500,
+    "closeTime": 5,
+    "requestTimeout": 2,
+    "method": "GET",
+    "headers": [{
+        "key": "Host",
+        "value": "www.zhaopin.com"
+    }, {
+        "key": "Referer",
+        "value": "http://www.zhaopin.com"
+    }, {
+        "key": "User-Agent",
+        "value": "Mozilla/5.0 (Linux; Android 4.2.2; GT-I9505 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.59 Mobile Safari/537.36"
+    }, {
+        "key": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    }, {
+        "key": "Accept-Language",
+        "value": "zh-CN,zh;q=0.8"
+    }, {
+        "key": "Cache-Control",
+        "value": "max-age=0"
+    }, {
+        "key": "Connection",
+        "value": "keep-alive"
+    }],
+    "proxy": [],
+    "schedulers": [{
+        "route": "http://sou.zhaopin.com/jobs/searchresult.ashx",
+        "text": {
+            "regex": [],
+            "xpath": [{
+                "domStr": ".pagesDown ul li:not(.nextpagego-box):not(.clearfix) a",
+                "key": "pageHref",
+                "type": 1,
+                "attrKey": "href"
+            }]
+        }
+    }],
+    "pages": [{
+        "route": "http://sou.zhaopin.com/jobs/searchresult.ashx",
+        "mainKey": "name",
+        "text": {
+            "regex": [],
+            "xpath": [{
+                "prefix": "#newlist_list_content_table",
+                "arr": [{
+                    "domStr": ".zwmc a",
+                    "key": "name",
+                    "type": 0,
+                    "attrKey": ""
+                }]
+            }]
+        }
+    }]
+}

@@ -1,10 +1,11 @@
 package parser
 
 import (
-	"labour/common"
-	"labour/models"
 	"regexp"
 	"strings"
+
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -26,7 +27,6 @@ func ParseSchedulerItemXpath(body string, xpath []*models.XpathItem) []models.Ke
 				r = append(r, models.KeyValuePair{v.Key, filter.ReplaceAllString(s.Text(), "")})
 			} else if v.Type == 1 {
 				attrValue, exists := s.Attr(v.AttrKey)
-
 				if exists {
 					r = append(r, models.KeyValuePair{v.Key, filter.ReplaceAllString(attrValue, "")})
 				}

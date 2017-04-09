@@ -2,8 +2,8 @@ package parser
 
 import (
 	"encoding/json"
-	"labour/common"
-	"labour/models"
+	"github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
 	"regexp"
 	"strings"
 )
@@ -13,7 +13,7 @@ func ParseRegex(body string, regex []*models.RegexItem) [][]models.KeyValuePair 
 	body = common.UnicodeConvert(body)
 
 	for _, v := range regex {
-		r, err := regexp.Compile(common.RegStrUnquote(v.RegexStr))
+		r, err := regexp.Compile(v.RegexStr)
 		if err != nil {
 			common.Logger(common.LOG_WARNING, err.Error())
 			return items

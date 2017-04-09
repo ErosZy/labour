@@ -1,8 +1,9 @@
 package router
 
 import (
-	"labour/common"
 	"regexp"
+
+	"github.com/ErosZy/labour/common"
 )
 
 type Router struct {

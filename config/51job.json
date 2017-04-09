@@ -1,25 +1,40 @@
 {
-    "targetUrl": "http://search.51job.com/list/000000,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E5%2588%2586%25E6%259E%2590,2,1.html",
-    "threadNum": 5,
+    "targetUrl": "http://search.51job.com/list/000000,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E5%2588%2586%25E6%259E%2590,2,58.html",
+    "threadNum": 4,
     "retryMaxCount": 10,
-    "sleepTime": 500,
+    "sleepTime": 250,
     "closeTime": 5,
     "requestTimeout": 2,
-    "headers": {
-        "Host": "www.51job.com",
-        "Referer": "http://www.51job.com",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 4.2.2; GT-I9505 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.59 Mobile Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "zh-CN,zh;q=0.8",
-        "Cache-Control": "max-age=0",
-        "Connection": "keep-alive"
-    },
+    "method": "GET",
+    "headers": [{
+        "key": "Host",
+        "value": "www.51job.com"
+    }, {
+        "key": "Referer",
+        "value": "http://www.51job.com"
+    }, {
+        "key": "User-Agent",
+        "value": "Mozilla/5.0 (Linux; Android 4.2.2; GT-I9505 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.59 Mobile Safari/537.36"
+    }, {
+        "key": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    }, {
+        "key": "Accept-Language",
+        "value": "zh-CN,zh;q=0.8"
+    }, {
+        "key": "Cache-Control",
+        "value": "max-age=0"
+    }, {
+        "key": "Connection",
+        "value": "keep-alive"
+    }],
+    "proxy": [],
     "schedulers": [{
         "route": "http://search.51job.com/list",
         "text": {
             "regex": [],
             "xpath": [{
-                "domStr": ".p_in li:not(.bk)",
+                "domStr": ".p_in li:not(.bk) a",
                 "key": "pageHref",
                 "type": 1,
                 "attrKey": "href"
@@ -30,7 +45,7 @@
         "text": {
             "regex": [],
             "xpath": [{
-                "domStr": ".p_in li:not(.bk)",
+                "domStr": ".p_in li:not(.bk) a",
                 "key": "pageHref",
                 "type": 1,
                 "attrKey": "href"
@@ -43,7 +58,7 @@
         "text": {
             "regex": [],
             "xpath": [{
-                "prefix": "",
+                "prefix": "#resultList",
                 "arr": [{
                     "domStr": "p.t1 span a",
                     "key": "name",
@@ -58,7 +73,7 @@
         "text": {
             "regex": [],
             "xpath": [{
-                "prefix": "",
+                "prefix": "#resultList",
                 "arr": [{
                     "domStr": "p.t1 span a",
                     "key": "name",

@@ -2,11 +2,12 @@ package process
 
 import (
 	"encoding/json"
-	_common "labour/common"
-	"labour/models"
-	"labour/parser"
-	"labour/router"
 	"net/url"
+
+	_common "github.com/ErosZy/labour/common"
+	"github.com/ErosZy/labour/models"
+	"github.com/ErosZy/labour/parser"
+	"github.com/ErosZy/labour/router"
 
 	"github.com/ErosZy/singoriensis/common"
 )
@@ -28,6 +29,11 @@ func NewProcess(taskInfo *models.TaskInfoModel) *Process {
 	}
 
 	return &Process{router}
+}
+
+func (self *Process) Do(page *common.Page) {
+	_common.Logger(_common.LOG_INFO, page.Req.URL.String())
+	self.router.Match(page.Req.URL.String(), page)
 }
 
 func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *models.SchedulerItemModel) router.RouterHandlerFunc {
@@ -58,7 +64,7 @@ func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *mode
 			}
 
 			pJson := pageItem.Json
-			if pJson.JSONs != nil {
+			if pJson != nil && pJson.JSONs != nil {
 				switch pJson.Type {
 				case 0:
 					pageItems = append(pageItems, parser.ParseJSON(bodyStr, pJson.JSONs))
@@ -86,7 +92,7 @@ func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *mode
 		}
 
 		sJson := schedulerItem.Json
-		if sJson.JSONs != nil {
+		if sJson != nil && sJson.JSONs != nil {
 			switch sJson.Type {
 			case 0:
 				schedulers = concat(schedulers, parser.ParseJSON(bodyStr, sJson.JSONs))

@@ -14,7 +14,7 @@
         "value": "http://www.51job.com"
     }, {
         "key": "User-Agent",
-        "value": "Mozilla/5.0 (Linux; Android 4.2.2; GT-I9505 Build/JDQ39) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.59 Mobile Safari/537.36"
+        "value": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
     }, {
         "key": "Accept",
         "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
@@ -38,15 +38,9 @@
                 "key": "pageHref",
                 "type": 1,
                 "attrKey": "href"
-            }]
-        }
-    }, {
-        "route": "http://search.51job.com/jobsearch/search_result.php",
-        "text": {
-            "regex": [],
-            "xpath": [{
-                "domStr": ".p_in li:not(.bk) a",
-                "key": "pageHref",
+            }, {
+                "domStr": "#resultList .el .t1 span a",
+                "key": "itemHref",
                 "type": 1,
                 "attrKey": "href"
             }]
@@ -60,46 +54,94 @@
                 "key": "pageHref",
                 "type": 1,
                 "attrKey": "href"
+            }, {
+                "domStr": "#resultList .el .t1 span a",
+                "key": "itemHref",
+                "type": 1,
+                "attrKey": "href"
             }]
+        }
+    }, {
+        "route": "http://jobs.51job.com/.+?/\\d+?\\.html",
+        "text": {
+            "regex": [],
+            "xpath": []
         }
     }],
     "pages": [{
         "route": "http://search.51job.com/list",
-        "mainKey": "id",
+        "mainKey": "",
         "text": {
             "regex": [],
-            "xpath": [{
-                "prefix": "#resultList",
-                "arr": [{
-                    "domStr": "p.t1 span a",
-                    "key": "name",
-                    "type": 0,
-                    "attrKey": ""
-                }, {
-                    "domStr": "p.t1 input",
-                    "key": "id",
-                    "type": 1,
-                    "attrKey": "value"
-                }]
-            }]
+            "xpath": []
         }
     }, {
         "route": "http://search.51job.com/jobsearch/search_result.php",
-        "mainKey": "name",
+        "mainKey": "",
+        "text": {
+            "regex": [],
+            "xpath": []
+        }
+    }, {
+        "route": "http://jobs.51job.com/.+?/\\d+?\\.html",
+        "mainKey": "jobId",
         "text": {
             "regex": [],
             "xpath": [{
-                "prefix": "#resultList",
+                "prefix": ".tCompany_center .tHeader",
                 "arr": [{
-                    "domStr": "p.t1 span a",
-                    "key": "name",
+                    "domStr": "#hidJobID",
+                    "key": "jobId",
+                    "type": 1,
+                    "attrKey": "value"
+                }, {
+                    "domStr": ".cn h1",
+                    "key": "title",
+                    "type": 1,
+                    "attrKey": "title"
+                }, {
+                    "domStr": ".cn .lname",
+                    "key": "city",
                     "type": 0,
                     "attrKey": ""
                 }, {
-                    "domStr": "p.t1 input",
-                    "key": "id",
-                    "type": 1,
-                    "attrKey": "value"
+                    "domStr": ".cn strong",
+                    "key": "salary",
+                    "type": 0,
+                    "attrKey": ""
+                }, {
+                    "domStr": ".cn ltype",
+                    "key": "type",
+                    "type": 0,
+                    "attrKey": ""
+                }]
+            }, {
+                "prefix": ".tCompany_center .tCompany_main",
+                "arr": [{
+                    "domStr": ".t1 .sp4:nth-child(1)",
+                    "key": "education",
+                    "type": 0,
+                    "attrKey": ""
+                }, {
+                    "domStr": ".t1 .sp4:nth-child(2)",
+                    "key": "num",
+                    "type": 0,
+                    "attrKey": ""
+                }, {
+                    "domStr": ".t1 .sp4:nth-child(3)",
+                    "key": "date",
+                    "type": 0,
+                    "attrKey": ""
+                }, {
+                    "domStr": ".t2",
+                    "key": "welfare",
+                    "type": 0,
+                    "attrKey": ""
+                }, {
+                    "domStr": ".tBorderTop_box .job_msg",
+                    "key": "desc",
+                    "type": 0,
+                    "attrKey": ""
                 }]
             }]
         }

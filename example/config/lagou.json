@@ -1,0 +1,91 @@
+{
+    "targetUrl": "https://www.lagou.com/zhaopin/shujuchanpinjingli/",
+    "threadNum": 3,
+    "retryMaxCount": 10,
+    "sleepTime": 2000,
+    "closeTime": 5,
+    "requestTimeout": 5,
+    "method": "GET",
+    "headers": [{
+        "key": "Host",
+        "value": "www.lagou.com"
+    }, {
+        "key": "Referer",
+        "value": "http://www.lagou.com"
+    }, {
+        "key": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.110 Safari/537.36"
+    }, {
+        "key": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+    }, {
+        "key": "Accept-Language",
+        "value": "zh-CN,zh;q=0.8"
+    }, {
+        "key": "Cache-Control",
+        "value": "max-age=0"
+    }, {
+        "key": "Connection",
+        "value": "keep-alive"
+    }],
+    "proxy": [],
+    "schedulers": [{
+        "route": "https://www.lagou.com/zhaopin/shujuchanpinjingli",
+        "text": {
+            "regex": [],
+            "xpath": [{
+                "domStr": "#s_position_list .item_con_list .con_list_item .position_link",
+                "key": "itemHref",
+                "type": 1,
+                "attrKey": "href"
+            }, {
+                "domStr": ".pager_container .page_no",
+                "key": "pageHref",
+                "type": 1,
+                "attrKey": "href"
+            }]
+        }
+    }, {
+        "route": "https://www.lagou.com/jobs/\\d+.html",
+        "text": {
+            "regex": [],
+            "xpath": []
+        }
+    }],
+    "pages": [{
+        "route": "https://www.lagou.com/zhaopin/shujuchanpinjingli",
+        "mainKey": "",
+        "text": {
+            "regex": [],
+            "xpath": []
+        }
+    }, {
+        "route": "https://www.lagou.com/jobs/\\d+.html",
+        "mainKey": "jobId",
+        "text": {
+            "regex": [],
+            "xpath": [{
+                "prefix": "body",
+                "arr": [{
+                    "domStr": "#jobid",
+                    "key": "jobId",
+                    "type": 1,
+                    "attrKey": "value"
+                }]
+            }, {
+                "prefix": ".position-content",
+                "arr": [{
+                    "domStr": ".job-name",
+                    "key": "jobname",
+                    "type": 1,
+                    "attrKey": "title"
+                }, {
+                    "domStr": ".company",
+                    "key": "company",
+                    "type": 0,
+                    "attrKey": ""
+                }]
+            }]
+        }
+    }]
+}

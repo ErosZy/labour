@@ -24,7 +24,7 @@ func NewProcess(taskInfo *models.TaskInfoModel) *Process {
 	for index, schedulerItem := range schedulers {
 		router.Add(
 			schedulerItem.Route,
-			getProcessRouterHandler(&pages[index], &schedulerItem),
+			getProcessRouterHandler(&pages[index], schedulerItem),
 		)
 	}
 
@@ -36,7 +36,7 @@ func (self *Process) Do(page *common.Page) {
 	self.router.Match(page.Req.URL.String(), page)
 }
 
-func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *models.SchedulerItemModel) router.RouterHandlerFunc {
+func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem models.SchedulerItemModel) router.RouterHandlerFunc {
 	return func(urlStr string, params ...interface{}) {
 		var pageItems [][]models.KeyValuePair
 		var schedulers []models.KeyValuePair
@@ -73,6 +73,10 @@ func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *mode
 				}
 			}
 
+			if (len(pXpath) > 0 || len(pRegex) > 0 || pJson != nil && pJson.JSONs != nil) && len(pageItems) == 0 {
+				_common.Logger(_common.LOG_WARNING, "none of <pages> matched: "+urlStr)
+			}
+
 			addPageItems(page, pageItems, pageItem.MainKey)
 		}
 
@@ -99,6 +103,10 @@ func getProcessRouterHandler(pageItem *models.PageItemModel, schedulerItem *mode
 			case 1:
 				schedulers = concat(schedulers, parser.ParseJSONP(bodyStr, sJson.JSONs))
 			}
+		}
+
+		if (len(sXpath) > 0 || len(sRegex) > 0 || sJson != nil && sJson.JSONs != nil) && len(schedulers) == 0 {
+			_common.Logger(_common.LOG_WARNING, "none of <schedulers> matched: "+urlStr)
 		}
 
 		addSchedulers(page, schedulers)
